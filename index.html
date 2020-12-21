@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <div>
+      <p>https://i.pinimg.com/474x/da/48/74/da487429ecbe4ce97cd13125335ccd17.jpg</p>
+      <input type="text" placeholder="画像のURLを入力" id="imageSrc">
+      <input type="number" placeholder="横" id="imageX">
+      <input type="number" placeholder="縦" id="imageY">
+      <input type="text" placeholder="表示したい文字" id="imageText">
+      <input type="number" placeholder="横" id="textX">
+      <input type="number" placeholder="縦" id="textY">
+      <input type="number" placeholder="フォントサイズ" id="fontSize">
+      <input type="text" value="serif" id="font">
+      
+      
+      <input type="button" value="送信" onclick="drawImage()">
+    </div>
+    <script>
+        const canvas = document.getElementById("canvas");
+        // canvasを操作する機能を持ったオブジェクトを取り出す
+        // https://developer.mozilla.org/ja/docs/Web/API/CanvasRenderingContext2D
+        const ctx = canvas.getContext("2d");
+        // Imageインスタンスの作成
+        const img = new Image()
+
+        function drawImage(){
+        // srcプロパティに画像の取得先のパスをセットする
+        // https://i.pinimg.com/474x/da/48/74/da487429ecbe4ce97cd13125335ccd17.jpg
+        const imageSrc = document.getElementById("imageSrc").value
+        img.src = imageSrc
+
+        // テキスト取得
+        const imageText = document.getElementById("imageText").value
+
+        // 画像の位置取得
+        const imageX = document.getElementById("imageX").value
+        const imageY = document.getElementById("imageY").value
+
+        // テキストの位置取得
+        const textX = document.getElementById("textX").value
+        const textY = document.getElementById("textY").value
+
+        // テキストのサイズ
+        const fontSize = document.getElementById("fontSize").value
+
+        // テキストのフォント
+        const font = document.getElementById("font").value
+
+
+        // 画像の読み込まれた際にdrawImage画像を描画するメソッドを呼び出す
+        img.onload = () => {
+            // x,y
+            ctx.drawImage(img, imageX, imageY)
+            // ctx.font = "48px serif"
+            ctx.font = `${fontSize}px ${font}`;
+            ctx.fillText(imageText, textX, textY)
+        }
+    }
+    </script>
+    <!-- <script src="main.js"></script> -->
+</body>
+</html>

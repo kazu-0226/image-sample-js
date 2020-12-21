@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" onclick="moveText(event)" width="400" height="400"></canvas>
+    <div>
+      <input onchange="drawImage()" id="imageSrcText" type="text" placeholder="画像のパス">
+    </div>
+    <div>
+      <input onchange="drawImage()" id="messageText" type="text" placeholder="メッセージ">
+    </div>
+    <div>
+      <input onchange="drawImage()" id="messagePosX" type="number" placeholder="位置(X)">
+    </div>
+    <div>
+      <input onchange="drawImage()" id="messagePosY" type="number" placeholder="位置(Y)">
+    </div>
+    <div>
+      <input onchange="drawImage()" id="fontSize" type="number" placeholder="フォントサイズ">
+    </div>
+		<script>
+      const imageSrcText = document.getElementById("imageSrcText")
+      const messageText = document.getElementById("messageText")
+      const messagePosX = document.getElementById("messagePosX")
+      const messagePosY = document.getElementById("messagePosY")
+      const fontSize = document.getElementById("fontSize")
+
+			// canvas要素を取得
+      const canvas = document.getElementById("canvas")
+			// canvasを操作する機能を持った、オブジェクトを取り出す 
+      const ctx = canvas.getContext("2d")
+      const img1 = new Image()
+
+      // srcプロパティに画像の取得先のパスをセットする
+      function drawImage(x, y) {
+        img1.src = imageSrcText.value
+        img1.onload = () => {
+          ctx.drawImage(img1, 0, 0)
+          // 文字を埋め込む
+          ctx.font = `${fontSize.value}px sans-serif`
+          ctx.fillText(messageText.value, x, y)
+        }
+      }
+
+      function moveText(event) {
+        drawImage(event.clientX, event.clientY)
+      }
+		</script>
+</body>
+</html>

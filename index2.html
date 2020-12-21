@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400" onclick="moveText(event)"></canvas>
+    <div>
+      <p>https://i.pinimg.com/474x/da/48/74/da487429ecbe4ce97cd13125335ccd17.jpg</p>
+      <input onchange="drawImage()" type="text" placeholder="画像のURLを入力" id="imageSrc">
+      <input onchange="drawImage()" type="number" placeholder="横" id="imageX">
+      <input onchange="drawImage()" type="number" placeholder="縦" id="imageY">
+      <input onchange="drawImage()" type="text" placeholder="表示したい文字" id="imageText">
+      <input onchange="drawImage()" type="number" placeholder="横" id="textX">
+      <input onchange="drawImage()" type="number" placeholder="縦" id="textY">
+      <input onchange="drawImage()" type="number" placeholder="フォントサイズ" id="fontSize">
+      <input onchange="drawImage()" type="text" value="serif" id="font">
+    </div>
+    <script>
+        const imageSrc = document.getElementById("imageSrc")
+        const imageText = document.getElementById("imageText") // テキスト取得
+        const imageX = document.getElementById("imageX") // 画像の位置取得
+        const imageY = document.getElementById("imageY") // 画像の位置取得
+        const textX = document.getElementById("textX")  // テキストの位置取得
+        const textY = document.getElementById("textY") // テキストの位置取得
+        const fontSize = document.getElementById("fontSize") // テキストのサイズ
+        const font = document.getElementById("font") // テキストのフォント
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const img = new Image()
+
+
+        function drawImage(x, y){
+            img.src = imageSrc.value
+            img.onload = () => {
+                ctx.drawImage(img, imageX.value, imageY.value)
+                ctx.font = `${fontSize.value}px ${font.value}`;
+                ctx.fillText(imageText.value, x, y)
+            }
+        }
+
+        function moveText(event){
+            drawImage(event.clientX, event.clientY )
+        }
+    </script>
+    <!-- <script src="main.js"></script> -->
+</body>
+</html>
